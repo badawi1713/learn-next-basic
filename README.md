@@ -69,20 +69,9 @@
 
 - GetStaticPaths biasanya digunakan bersama dengan getStaticProps, seperti halnya getStaticProps, getStaticPaths digunakan untuk mendefinisikan dinamisnya sebuah alamat website
 - Fungsi ini wajib me-return sebuah objek yang di dalamnya ada beberapa key dan value. Salah satu key wajibnya adalah “paths”
-- `return {`
-  `paths: [`
-  `{ params: { id: '1' } },`
-  `{ params: { id: '2' } }`
-  `],`
-  `fallback: ...`
-  `}`
+- `return { paths: [ { params: { id: '1' } }, { params: { id: '2' } } ], fallback: ... }`
 - Perlu menjadi catatan, saat me-return getStaticPath pada key “paths” nama params yang diinput harus sesuai dengan nama file Next.js kita. Misalnya struktur file kita seperti ini: `page/posts/[id].js` maka, nama paramsnya adalah:
-  `return {`
-  `paths: [`
-  `{ params: { id: 'postingan pertama' } },`
-  `],`
-  `fallback: ...`
-  `}`
+  `return { paths: [ { params: { id: 'postingan pertama' } }, ], fallback: ... }`
 - Fallback pada hasil return, key fallback ini sifatnya wajib dan bernilai boolean
 
 ## Data fetching getServerSideProps
