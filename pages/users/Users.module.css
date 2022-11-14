@@ -1,0 +1,32 @@
+.users__container {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.users__item {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #b9b9b9;
+    border-radius: 4px;
+    height: 64px;
+    cursor: pointer;
+    color: var(--black);
+    padding: 12px;
+}
+
+.users__item:hover {
+    border: 1px solid #efefef;
+    background-color: #efefef;
+    color: var(--primary);
+}
+
+.users__detail {
+    margin-top: 24px;
+    background-color: #fff;
+    border: 1px solid #b9b9b9;
+    border-radius: 4px;
+    color: var(--black);
+    padding: 12px;
+}

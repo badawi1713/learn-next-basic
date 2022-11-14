@@ -1,0 +1,20 @@
+.container__blog {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.container__blog-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: #fff;
+    border: 1px solid #b9b9b9;
+    border-radius: 4px;
+    color: var(--black);
+    padding: 12px;
+}
+
+.container__blog-item > h3 {
+    color: var(--primary);
+}

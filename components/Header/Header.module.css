@@ -1,0 +1,28 @@
+.header__container {
+    padding: 8px;
+    box-shadow: 3px 3px 20px 3px rgba(0, 0, 0, 0.1);
+}
+
+.header__list {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    padding: 12px;
+}
+
+.header__list-item {
+    color: var(--black);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.header__list-item:hover {
+    color: var(--primary);
+}
+
+.header__list-item--active {
+    color: var(--primary);
+    font-size: 1rem;
+    font-weight: 500;
+}

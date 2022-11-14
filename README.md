@@ -1,34 +1,90 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Catatan belajar
 
-## Getting Started
+## Instalasi Next.js dengan Typescript dan yarn
 
-First, run the development server:
+`yarn create-next-app [nama_projek] --ts`
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Menjalakankan projek
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`yarn run dev`
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Struktur dan folder projek Next.js
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.tsx`.
+- public/: Digunakan untuk menyimpan file statis
+- styles/: Digunakan untuk menyimpan file style (css/scss)
+- pages/: Digunakan untuk membuat halaman dan routing file halaman yang telah dibuat
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Routing di Next.js
 
-## Learn More
+- Next.js sudah meng-handle routing dengan menambahkan file di folder pages/
 
-To learn more about Next.js, take a look at the following resources:
+## Menggunakan .eslit untuk standar code formater
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`npx eslint --init`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Berpindah halaman dengan component Link
 
-## Deploy on Vercel
+- Menggunakan Link dan bukan tag anchor atau `<a href="/">Link</a>`
+- Karena kalau menggunakan tag anchor akan me-refresh halaman
+- Menggunakan Link dengan mengimport `Link from 'next/link'`
+- Lalu penggunaannya, `<Link href="/">Link</Link>`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Type props dengan Typescript
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- children memiliki type ReactNode
+
+## Kustom halaman 404
+
+- Membuat file 404.tsx di root folder pages/
+
+## Redirect dengan router
+
+- `import {useRouter} from 'next/router'`
+- Penggunaan: `const router = useRouter()`
+- `router.push('/')`
+
+## Membuat metadata di Next.js untuk SEO
+
+- Menggunakan tag `<Head/>` dari `import Head from 'next/head'`
+
+## Optimasi image di Next.js
+
+- `import Image from next/image`
+- Penggunaan: `<Image src="" alt="" />`
+
+## Dynamic routes
+
+- Supaya route dinasim kita bisa tambahkan file di sebuah folder, contoh: `users/[id].tsx`
+- Yup, kita bisa beri nama file `[id].tsx` supaya dinamis dan mengambil parameter berupa id
+- parameter id bisa didapat menggunakan useRouter, `const {id} = router.query`
+
+## Data fetching getStaticProps
+
+- Data fetching merupakan metode mengambil data di aplikasi Next.js
+- getStaticProps: Bisa digunakan untuk menampilkan data sebelum tampilan di-render, sehingga proses request API bisa tidak muncul di network browser karena diproses dulu di server (Next)
+- ketika build, data statis yang diambil langsung ditampilkan
+- kelemahan dari getStaticProps tidak untuk digunakan pada data yang bersifat dinamis
+
+## Data fetching getStaticPaths(context)
+
+- GetStaticPaths biasanya digunakan bersama dengan getStaticProps, seperti halnya getStaticProps, getStaticPaths digunakan untuk mendefinisikan dinamisnya sebuah alamat website
+- Fungsi ini wajib me-return sebuah objek yang di dalamnya ada beberapa key dan value. Salah satu key wajibnya adalah “paths”
+- `return {`
+  `paths: [`
+  `{ params: { id: '1' } },`
+  `{ params: { id: '2' } }`
+  `],`
+  `fallback: ...`
+  `}`
+- Perlu menjadi catatan, saat me-return getStaticPath pada key “paths” nama params yang diinput harus sesuai dengan nama file Next.js kita. Misalnya struktur file kita seperti ini: `page/posts/[id].js` maka, nama paramsnya adalah:
+  `return {`
+  `paths: [`
+  `{ params: { id: 'postingan pertama' } },`
+  `],`
+  `fallback: ...`
+  `}`
+- Fallback pada hasil return, key fallback ini sifatnya wajib dan bernilai boolean
+
+## Data fetching getServerSideProps
+
+- Seperti pada getStaticProps yang mereturn props, getServerSideProps lebih cocok digunakan pada halaman yang bersifat dinamis atau berubah-ubah isi kontennya, sehingga ketika build halaman ini tidak dijalankan oleh server, namun akan dimuat ketika kita membuka halaman yang menggunakan getServerSideProps
